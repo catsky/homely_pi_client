@@ -10,7 +10,9 @@ class Image(models.Model):
   created_at = models.DateTimeField('date created')
 
   def was_created_recently(self):
-    return self.created_at >= timezone.now() - datetime.timedelta(days=1)
+    now = timezone.now()
+    return now - datetime.timedelta(days=1) <= self.created_at <= now
+    
   was_created_recently.admin_order_field = 'created_at'
   was_created_recently.boolean = True
   was_created_recently.short_description = 'Created recently?'
