@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 import os
+from datetime import timedelta
 
 from celery import Celery
 
@@ -14,6 +15,21 @@ app = Celery('homely_pi_client')
 # Using a string here means the worker will not have to
 # pickle the object when using Windows.
 app.config_from_object('django.conf:settings')
+
+
+app.conf.update(
+  CELERYBEAT_SCHEDULE = {
+      'add-every-30-seconds': {
+          'task': 'cameras.tasks.add',
+          'schedule': timedelta(seconds=30),
+          'args': (16, 16)
+      },
+  },
+  CELERY_TIMEZONE = 'Australia/Brisbane',
+  CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend',
+  BROKER_URL = 'django://'
+)
+
 
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 

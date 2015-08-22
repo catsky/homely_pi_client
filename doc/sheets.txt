@@ -1,0 +1,2 @@
+# start a celery work and its schedule
+celery -A homely_pi_client worker -l info -B

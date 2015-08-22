@@ -70,9 +70,9 @@ TEMPLATES = [
         },
     },
 ]
-BROKER_URL = 'django://'
+
 WSGI_APPLICATION = 'homely_pi_client.wsgi.application'
-CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend'
+
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
