@@ -20,9 +20,9 @@ app.config_from_object('django.conf:settings')
 app.conf.update(
   CELERYBEAT_SCHEDULE = {
       'add-every-30-seconds': {
-          'task': 'cameras.tasks.add',
+          'task': 'cameras.tasks.email_notification',
           'schedule': timedelta(seconds=30),
-          'args': (16, 16)
+          'args': ('catsky',)
       },
   },
   CELERY_TIMEZONE = 'Australia/Brisbane',

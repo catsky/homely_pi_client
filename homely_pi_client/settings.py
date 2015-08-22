@@ -39,7 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'cameras',
     'djcelery',
-    'kombu.transport.django'
+    'kombu.transport.django',
+    'djcelery_email'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -72,7 +73,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'homely_pi_client.wsgi.application'
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 
+# email settings
+from .secret import email_settings
+EMAIL_USE_TLS = email_settings['EMAIL_USE_TLS']
+EMAIL_HOST = email_settings['EMAIL_HOST']
+EMAIL_PORT = email_settings['EMAIL_PORT']
+EMAIL_HOST_USER = email_settings['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = email_settings['EMAIL_HOST_PASSWORD']
+DEFAULT_FROM_EMAIL = email_settings['DEFAULT_FROM_EMAIL']
+DEFAULT_TO_EMAIL = email_settings['DEFAULT_TO_EMAIL']
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
