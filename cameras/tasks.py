@@ -5,27 +5,22 @@ from django.conf import settings
 from celery import shared_task
 
 from os import path
+import time
 
-
-@shared_task
-def add(x, y):
-  return x + y
-
-
-@shared_task
-def mul(x, y):
-    return x * y
-
-
-@shared_task
-def xsum(numbers):
-    return sum(numbers)
-    
+import picamera
+camera = picamera.PiCamera()
+   
+def take_picture:
+  timestr = time.strftime("%Y%m%d-%H%M%S") + ".jpg"
+  store_to_path = path.join(settings.BASE_DIR, 'static/cameras/{filename}'.format(filename=timestr))
+  camera.capture(store_to_path)
+  return store_to_path
 
 @shared_task
 def email_notification(name):
     email = EmailMessage('Hello', 'Something goes here', 'zhdhui@gmail.com',
               ['zhdhui@gmail.com'])
-    email.attach_file(path.join(settings.BASE_DIR, 'static/cameras/1.jpg'))
+    
+    email.attach_file(take_picture())
     email.send()      
     return email
