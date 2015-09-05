@@ -1,2 +1,3 @@
 # start a celery work and its schedule
-celery -A homely_pi_client worker -l info -B
+celery -A homely_pi_client worker -l info --concurrency=1 -B
+ps auxww | grep 'celery' | awk '{print $2}' | xargs kill -9

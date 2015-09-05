@@ -8,12 +8,12 @@ from os import path
 import time
 
 import picamera
-camera = picamera.PiCamera()
    
-def take_picture:
+def take_picture():
   timestr = time.strftime("%Y%m%d-%H%M%S") + ".jpg"
   store_to_path = path.join(settings.BASE_DIR, 'static/cameras/{filename}'.format(filename=timestr))
-  camera.capture(store_to_path)
+  with picamera.PiCamera() as camera:
+    camera.capture(store_to_path)
   return store_to_path
 
 @shared_task
