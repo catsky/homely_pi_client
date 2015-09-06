@@ -19,9 +19,9 @@ app.config_from_object('django.conf:settings')
 
 app.conf.update(
   CELERYBEAT_SCHEDULE = {
-      'add-every-30-seconds': {
+      'add-every-120-seconds': {
           'task': 'cameras.tasks.email_notification',
-          'schedule': timedelta(seconds=30),
+          'schedule': timedelta(seconds=120),
           'args': ('catsky',)
       },
   },
