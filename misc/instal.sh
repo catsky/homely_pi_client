@@ -4,5 +4,5 @@ RELEASE_PATH=`dirname "$parent"`
 
 
 echo ">>> Install Mysql Server >>>"
-bash $RELEASE_PATH/misic/auto_mysql.sh
+bash $RELEASE_PATH/misc/auto_mysql.sh
 
